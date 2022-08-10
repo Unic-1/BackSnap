@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .main {
+        margin: auto;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        min-height: 600px;
+        height: fit-content;
+      }
+
+      .frame-container {
+        height: 600px;
+        width: 600px;
+      }
+
+      .image {
+        background-size: contain;
+        background-repeat: round;
+        max-width: 90%;
+        max-height: 70%;
+        overflow: hidden;
+      }
+
+      .slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 7px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        outline: none;
+        opacity: 0.7;
+        -webkit-transition: 0.2s;
+        transition: opacity 0.2s;
+      }
+
+      .slider:hover {
+        opacity: 1;
+      }
+
+      .slider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #04aa6d;
+        cursor: pointer;
+      }
+
+      .slider::-moz-range-thumb {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #04aa6d;
+        cursor: pointer;
+      }
+
+      .color-box {
+        height: 60px;
+        width: 60px;
+        background-color: red;
+        border-radius: 5px;
+        box-shadow: lightgrey 2px 2px 4px;
+      }
+
+      .ratio-box {
+        height: 40px;
+        width: 60px;
+        border: gray 2px solid;
+        position: relative;
+      }
+
+      .ratio-box::before {
+        content: "";
+        border-left: 2px;
+        border-top: 2px;
+        border-color: gray;
+        border-style: solid;
+        height: 15px;
+        width: 15px;
+        left: 2px;
+        top: 2px;
+        position: absolute;
+        margin: auto;
+      }
+
+      .ratio-box::after {
+        content: "";
+        border-right: 2px;
+        border-bottom: 2px;
+        border-color: gray;
+        border-style: solid;
+        height: 15px;
+        width: 15px;
+        right: 2px;
+        bottom: 2px;
+        position: absolute;
+        margin: auto;
+      }
+
+      .cool {
+        background-image: linear-gradient(to bottom right, teal, lightblue);
+      }
+    </style>
+    <title>bgShot</title>
+  </head>
+  <body>
+    <div class="h-screen bg-red-100">
+      <div
+        class="main bg-slate-100 w-3/4 drop-shadow-xl rounded-2xl overflow-hidden"
+      >
+        <div class="flex divide-x-2">
+          <div class="flex justify-center items-center basis-8/12 px-6">
+            <div class="frame-container flex items-center">
+              <div
+                id="bg-frame"
+                class="frame flex flex-col justify-center items-center w-full h-4/5 p-10"
+                style="background-color: purple"
+              >
+                <div class="image w-11/12 h-full bg-white">
+                  <img src="" alt="" class="h-full w-full" />
+                </div>
+                <div
+                  id="watermark-placeholder"
+                  class="text-white text-right w-11/12"
+                >
+                  @abc
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="basis-4/12 p-4">
+            <div class="flex flex-col gap-y-4">
+              <div>
+                <h3>Padding</h3>
+                <div class="content w-full">
+                  <input
+                    type="range"
+                    min="10"
+                    max="100"
+                    value="50"
+                    class="slider"
+                    id="paddingRange"
+                  />
+                </div>
+              </div>
+              <div>
+                <h3>Inset</h3>
+                <div class="content w-full">
+                  <input
+                    type="range"
+                    min="0"
+                    max="20"
+                    value="3"
+                    class="slider"
+                    id="insetRange"
+                  />
+                </div>
+              </div>
+              <div>
+                <h3>Border Radius</h3>
+                <div class="content w-full">
+                  <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    value="50"
+                    class="slider"
+                    id="radiusRange"
+                  />
+                </div>
+              </div>
+              <div>
+                <h3>Shadow</h3>
+                <div class="content w-full">
+                  <input
+                    type="range"
+                    min="15"
+                    max="50"
+                    value="5"
+                    class="slider"
+                    id="shadowRange"
+                  />
+                </div>
+              </div>
+              <div>
+                <h3>Background</h3>
+                <div class="content flex flex-col gap-y-4 w-full">
+                  <div class="flex justify-between">
+                    <button class="color-box"></button
+                    ><button
+                      onclick="bg('cool')"
+                      class="color-box cool"
+                    ></button
+                    ><button class="color-box"></button
+                    ><button class="color-box"></button
+                    ><button class="color-box"></button>
+                  </div>
+                  <div class="flex justify-between">
+                    <button class="color-box"></button
+                    ><button class="color-box"></button
+                    ><button class="color-box"></button
+                    ><button class="color-box"></button>
+                    <input
+                      type="color"
+                      id="favcolor"
+                      name="favcolor"
+                      value="#ff0000"
+                      class="color-box"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h3>Ratio</h3>
+                <div class="content w-full flex justify-between">
+                  <button
+                    onclick="ratio(-1, -1)"
+                    class="ratio-box flex justify-center items-center"
+                  >
+                    Auto
+                  </button>
+                  <button
+                    onclick="ratio(4, 3)"
+                    class="ratio-box flex justify-center items-center"
+                  >
+                    4:3
+                  </button>
+                  <button
+                    onclick="ratio(16, 9)"
+                    class="ratio-box flex justify-center items-center"
+                  >
+                    16:9
+                  </button>
+                  <button
+                    onclick="ratio(1, 1)"
+                    class="ratio-box flex justify-center items-center"
+                  >
+                    1:1
+                  </button>
+                  <button
+                    onclick="ratio(0, 0)"
+                    class="ratio-box flex justify-center items-center"
+                  >
+                    X:X
+                  </button>
+                </div>
+              </div>
+              <div>
+                <h3>Watermark</h3>
+                <div class="content w-full">
+                  <input type="text" class="w-full" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="actions p-2 bg-slate-200">
+          <input
+            type="file"
+            id="docpicker"
+            value="image/*"
+            accept="image/png, image/gif, image/jpeg"
+          />
+
+          <a
+            id="download"
+            download="myImage.png"
+            href=""
+            onclick="download_img(this);"
+            class="inline-flex px-2.5 py-1.5 bg-slate-500 text-white"
+          >
+            <span class="material-icons"> download </span>
+            <span> Download</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <script src="lib/html2canvas.min.js"></script>
+    <script>
+      download_img = function (el) {
+        html2canvas(document.getElementById("bg-frame")).then(function (
+          canvas
+        ) {
+          // document.body.appendChild(canvas);
+
+          // setTimeout(() => {
+          //   // get image URI from canvas object
+
+          //   var imageURI = canvas.toDataURL("image/png");
+          //   el.href = imageURI;
+          // }, 20 * 1000);
+
+          var imageURI = canvas.toDataURL("image/png");
+          el.href = imageURI;
+        });
+      };
+
+      const file = document.querySelector('input[type="file"]');
+      file.addEventListener("change", (ev, z) => {
+        var file = ev.target.files[0];
+
+        var reader = new FileReader();
+        reader.onloadend = function () {
+          document.querySelector("img").src = reader.result;
+          // document.querySelector(
+          //   ".image"
+          // ).style.backgroundImage = `url('${reader.result}')`;
+        };
+        reader.readAsDataURL(file);
+      });
+
+      document
+        .querySelector("#paddingRange")
+        .addEventListener("input", (ev) => {
+          console.log(ev.target.value);
+          updateFrame({
+            name: "padding",
+            value: ev.target.value + "px",
+          });
+        });
+
+      document.querySelector("#insetRange").addEventListener("input", (ev) => {
+        console.log(ev.target.value);
+        updateImage({
+          name: "padding",
+          value: ev.target.value + "px",
+        });
+      });
+
+      document.querySelector("#radiusRange").addEventListener("input", (ev) => {
+        console.log(ev.target.value);
+        const param = {
+          name: "borderRadius",
+          value: ev.target.value + "px",
+        };
+        updateImage(param);
+        // updateContent(param);
+      });
+
+      document.querySelector("#shadowRange").addEventListener("input", (ev) => {
+        console.log(ev.target.value);
+        // updateImage({
+        //   name: "boxShadow",
+        //   value: `black 15px 15px ${ev.target.value}px`,
+        // });
+
+        updateImage({
+          name: "filter",
+          value: `drop-shadow(0px 0px ${ev.target.value}px rgba(0,0,0,.8))`,
+        });
+
+        //     -webkit-filter: drop-shadow(0px 3px 10px rgba(0,0,0,.8));
+        // filter: drop-shadow(0px 0px 10px rgba(0,0,0,.8));
+      });
+
+      function updateFrame(param) {
+        document.querySelector(".frame").style[param.name] = param.value;
+      }
+
+      // function updateContent(param) {
+      //   document.querySelector("img").style[param.name] = param.value;
+      // }
+
+      function updateImage(param) {
+        document.querySelector(".image").style[param.name] = param.value;
+      }
+
+      function ratio(l, b) {
+        console.log(l, b);
+        const frame = document.querySelector(".frame");
+        console.log(frame.classList);
+        frame.classList.value = frame.classList.value.replace(
+          /h-[\d\w/]+/g,
+          ""
+        );
+        frame.classList.value = frame.classList.value.replace(
+          /w-[\d\w/]+/g,
+          ""
+        );
+
+        if (l === 4 && b === 3) {
+          frame.classList.add("h-3/4");
+          frame.classList.add("w-full");
+        } else if (l === 16 && b === 9) {
+          frame.classList.add("w-full");
+          frame.classList.add("h-3/5");
+        } else if (l === 1 && b === 1) {
+          frame.classList.add("w-full");
+          frame.classList.add("h-full");
+        }
+      }
+
+      function bg(tone) {
+        document.querySelector(".frame").classList.add(tone);
+      }
+    </script>
+  </body>
+</html>

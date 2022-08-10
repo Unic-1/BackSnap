@@ -1,0 +1,14 @@
+{
+  "name": "bgshot",
+  "version": "1.0.0",
+  "description": "Add background to an image. Inspired by Xnapper.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "satyam",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.8"
+  }
+}
