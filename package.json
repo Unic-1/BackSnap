@@ -1,5 +1,5 @@
 {
-  "name": "bgshot",
+  "name": "backsnap",
   "version": "1.0.0",
   "description": "Add background to an image. Inspired by Xnapper.",
   "main": "index.js",
